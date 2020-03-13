@@ -4,7 +4,7 @@ import api from '../api'
 
 import styled from 'styled-components'
 
-//import 'react-table/react-table.css'
+import 'react-table/react-table.css'
 
 const Wrapper = styled.div`
     padding: 0 40px 40px 40px;
@@ -74,7 +74,6 @@ class TestsList extends Component {
 
     render() {
         const { tests, isLoading } = this.state
-        console.log('TCL: TestsList -> render -> tests', tests)
 
         const columns = [
             {
