@@ -49,7 +49,7 @@ class TestsUpdate extends Component {
         this.setState({ rating })
     }
 
-    handlechangeInputTime = async event => {
+    handleChangeInputTime = async event => {
         const time = event.target.value
         this.setState({ time })
     }
