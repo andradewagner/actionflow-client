@@ -16,9 +16,11 @@ class Test extends Component {
 
         this.state = {
             id: this.props.match.params.id,
-            name: '',
-            rating: '',
-            time: '',
+            app: '',
+            feature: '',
+            executionTime: '',
+            screenshot: '',
+            log: [],
         }
     }
 
@@ -29,9 +31,11 @@ class Test extends Component {
         const myChartRef = this.chartRef.current.getContext("2d");
 
         this.setState({
-            name: test.data.data.name,
-            rating: test.data.data.rating,
-            time: test.data.data.time.join('/'),
+            app: test.data.data.app,
+            feature: test.data.data.feature,
+            executionTime: test.data.data.executionTime,
+            screenshot: test.data.data.screenshot,
+            log: test.data.data.log,
         })
 
         new Chart(myChartRef, {

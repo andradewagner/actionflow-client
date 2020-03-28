@@ -3,4 +3,7 @@ import TestsInsert from './TestsInsert'
 import TestsUpdate from './TestsUpdate'
 import Test from './Test'
 
-export { TestsList, TestsInsert, TestsUpdate, Test }
+import AutoTestList from './AutoTestList'
+import AutoTest from './AutoTest'
+
+export { TestsList, TestsInsert, TestsUpdate, Test, AutoTestList, AutoTest }

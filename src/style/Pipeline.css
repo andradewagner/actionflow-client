@@ -1,0 +1,11 @@
+.fineshed {
+    background-color: #c6e9af; border: 5px solid #338000;
+}
+
+.error {
+    background-color: #ffaaaa; border: 5px solid #ff2a2a;
+}
+
+.notprocessed {
+    background-color: #ccc; border: 5px solid #666;
+}

@@ -33,6 +33,11 @@ class Links extends Component {
                                 Create Test
                             </Link>
                         </Item>
+                        <Item>
+                            <Link to="/autos" className="nav-link">
+                                Automaçoes
+                            </Link>
+                        </Item>
                     </List>
                 </Collapse>
             </React.Fragment>
