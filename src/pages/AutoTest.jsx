@@ -3,11 +3,14 @@ import styled from 'styled-components'
 import apis from '../api'
 import '../style/Pipeline.css'
 
-const Wrapper = styled.div`
-    padding: 0 40px 40px 40px;
+const Wrapper = styled.div.attrs({className: "h-100 container"})`
+    padding: 40px 30px 40px 30px;
 `
+const Feature = styled.div.attrs({className: "align-items-start h-25"})``
+const Time = styled.div.attrs({className: "align-items-center justify-content-center h-50 font-weight-bold"})``
+const Step = styled.div.attrs({className: "align-items-end justify-content-center h-25 font-weight-bold"})``
 
-const PipelineItem = styled.div`width: 200px; height: 200px; float: left;`
+const PipelineItem = styled.div`width: 180px; height: 180px; float: left;`
 
 const Arrow = styled.div`
     background-image: url('/arrow.png');
@@ -43,18 +46,22 @@ class AutoTest extends Component {
     render() {
         return (
             <Wrapper>
+                <div className="row h-100">
                 {
                     this.state.features.map((feature, index) => (
                         <div>
                             <PipelineItem className={feature.status} key={index}>
-                                {feature.name}
-                                {feature.exectionTime}
-                                {index}
+                                <div className="container h-100">
+                                    <Feature className="row">{feature.name}</Feature>
+                                    <Time className="row">{feature.executionTime} seg</Time>
+                                    <Step className="row">{index + 1}/{this.state.features.length}</Step>
+                                </div>
                             </PipelineItem>
-                            <Arrow></Arrow>
+                            <Arrow hidden={(this.state.features.length - 1) === index}></Arrow>
                         </div>
                     ))
                 }
+                </div>
             </Wrapper>)
     }
 }
