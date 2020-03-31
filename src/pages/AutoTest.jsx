@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
+import Moment from 'react-moment'
 import styled from 'styled-components'
 import apis from '../api'
 import '../style/Pipeline.css'
 
-const Wrapper = styled.div.attrs({className: "h-100 container"})`
-    padding: 40px 30px 40px 30px;
-`
+const Wrapper = styled.div.attrs({className: "h-100 container"})``
 const Feature = styled.div.attrs({className: "align-items-start h-25"})``
 const Time = styled.div.attrs({className: "align-items-center justify-content-center h-50 font-weight-bold"})``
 const Step = styled.div.attrs({className: "align-items-end justify-content-center h-25 font-weight-bold"})``
@@ -29,6 +28,7 @@ class AutoTest extends Component {
             app: '',
             features: [],
             status: '',
+            createdAt: '',
         }
     }
 
@@ -39,29 +39,36 @@ class AutoTest extends Component {
         this.setState({
             app: auto.data.data.app,
             features: auto.data.data.features,
-            status: auto.data.data.status
+            status: auto.data.data.status,
+            createdAt: auto.data.data.createdAt,
         })
     }
 
     render() {
         return (
             <Wrapper>
-                <div className="row h-100">
+                <h4>Aplicaçao: {this.state.app}</h4>
+                <hr/>
+                <h4>Data da Execuçao: <Moment format="DD/MM/YYYY - HH:mm:SS">{this.state.createdAt}</Moment></h4>
                 {
                     this.state.features.map((feature, index) => (
                         <div>
                             <PipelineItem className={feature.status} key={index}>
                                 <div className="container h-100">
                                     <Feature className="row">{feature.name}</Feature>
-                                    <Time className="row">{feature.executionTime} seg</Time>
-                                    <Step className="row">{index + 1}/{this.state.features.length}</Step>
+                                    <Time className="row">
+                                        <div className={feature.status === "error" ? "col-sm-6" : ""}>{feature.executionTime} seg</div>
+                                        <div className="col-sm-2" hidden={feature.status !== "error"}>
+                                            <img src={"/document.png"} />
+                                        </div>
+                                    </Time>
+                                    <Step className="row">{index + 1} / {this.state.features.length}</Step>
                                 </div>
                             </PipelineItem>
                             <Arrow hidden={(this.state.features.length - 1) === index}></Arrow>
                         </div>
                     ))
                 }
-                </div>
             </Wrapper>)
     }
 }

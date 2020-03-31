@@ -1,13 +1,12 @@
 import React, { Component } from 'react'
 import ReactTable from 'react-table'
+import Moment from 'react-moment'
 import api from '../api'
 
 import styled from 'styled-components'
 import 'react-table/react-table.css'
 
-const Wrapper = styled.div`
-    padding: 0 40px 40px 40px;
-`
+const Wrapper = styled.div.attrs({className: "container"})``
 
 const View = styled.div`
     color: #ef9b0f;
@@ -53,10 +52,6 @@ class AutoTestList extends Component {
 
         const columns = [
             {
-                Header: 'ID',
-                accessor: '_id',
-                filterable: true,
-            }, {
                 Header: 'Aplicaçao',
                 accessor: 'app',
                 filterable: true,
@@ -65,6 +60,13 @@ class AutoTestList extends Component {
                 accessor: 'status',
                 filterable: true,
             }, {
+                id: "createdAt",
+                Header: 'Data',
+                accessor: d => {
+                    return <Moment format="DD/MM/YYYY">{d.createdAt}</Moment>
+                },
+                filterable: false,
+            },{
                 Header: '',
                 accessor: '',
                 Cell: function(props) {
@@ -91,7 +93,7 @@ class AutoTestList extends Component {
                         loading={isLoading}
                         defaultPageSize={10}
                         showPageSizeOptions={true}
-                        minRows={0}
+                        minRows={1}
                     />
                 )}
             </Wrapper>
