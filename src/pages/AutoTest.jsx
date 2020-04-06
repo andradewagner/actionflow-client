@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Moment from 'react-moment'
+import ReactModal from 'react-modal'
 import styled from 'styled-components'
 import apis from '../api'
 import '../style/Pipeline.css'
@@ -19,6 +20,7 @@ const Arrow = styled.div`
     height: 200px; 
     float: left;
 `
+ReactModal.setAppElement('#root')
 
 class AutoTest extends Component {
     constructor(props) {
@@ -29,7 +31,17 @@ class AutoTest extends Component {
             features: [],
             status: '',
             createdAt: '',
+            showModal: false,
         }
+        this.handleOpenModal = this.handleOpenModal.bind(this);
+    }
+
+    handleOpenModal = () => {
+        this.setState({ showModal: true });
+    }
+
+    handleCloseModal = () => {
+        this.setState({ showModal: false });
     }
 
     componentDidMount = async () => {
@@ -52,14 +64,14 @@ class AutoTest extends Component {
                 <h4>Data da Execuçao: <Moment format="DD/MM/YYYY - HH:mm:SS">{this.state.createdAt}</Moment></h4>
                 {
                     this.state.features.map((feature, index) => (
-                        <div>
+                        <div key={index}>
                             <PipelineItem className={feature.status} key={index}>
                                 <div className="container h-100">
                                     <Feature className="row">{feature.name}</Feature>
                                     <Time className="row">
                                         <div className={feature.status === "error" ? "col-sm-6" : ""}>{feature.executionTime} seg</div>
                                         <div className="col-sm-2" hidden={feature.status !== "error"}>
-                                            <img src={"/document.png"} />
+                                            <img onClick={ this.handleOpenModal } className="popup" src={"/document.png"} />
                                         </div>
                                     </Time>
                                     <Step className="row">{index + 1} / {this.state.features.length}</Step>
@@ -69,6 +81,10 @@ class AutoTest extends Component {
                         </div>
                     ))
                 }
+                <ReactModal isOpen={this.state.showModal}>
+                    <a onClick={this.handleCloseModal} className="close">X</a>
+                    <img src="https://cypress-io.ghost.io/blog/content/images/2019/05/inspect-snapshot.png" />
+                </ReactModal>
             </Wrapper>)
     }
 }
