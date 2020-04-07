@@ -1,5 +1,7 @@
 Aplicaçao frontend para centralizar execuçao de testes automatizados
 
+![](/public/dara.jpg)
+
 Necessário clonar o backend da aplicaçao para executar corretamente.
 
 ## Scripts disponíveis
