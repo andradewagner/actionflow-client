@@ -32,12 +32,13 @@ class AutoTest extends Component {
             status: '',
             createdAt: '',
             showModal: false,
+            screenshot: '',
         }
         this.handleOpenModal = this.handleOpenModal.bind(this);
     }
 
-    handleOpenModal = () => {
-        this.setState({ showModal: true });
+    handleOpenModal = (e) => {
+        this.setState({ showModal: true, screenshot: e.currentTarget.alt });
     }
 
     handleCloseModal = () => {
@@ -71,7 +72,7 @@ class AutoTest extends Component {
                                     <Time className="row">
                                         <div className={feature.status === "error" ? "col-sm-6" : ""}>{feature.executionTime} seg</div>
                                         <div className="col-sm-2" hidden={feature.status !== "error"}>
-                                            <img onClick={ this.handleOpenModal } className="popup" src={"/document.png"} />
+                                            <img onClick={ this.handleOpenModal } className="popup" src={"/document.png"} alt={feature.screenshot} />
                                         </div>
                                     </Time>
                                     <Step className="row">{index + 1} / {this.state.features.length}</Step>
@@ -83,7 +84,7 @@ class AutoTest extends Component {
                 }
                 <ReactModal isOpen={this.state.showModal}>
                     <a onClick={this.handleCloseModal} className="close">X</a>
-                    <img src="https://cypress-io.ghost.io/blog/content/images/2019/05/inspect-snapshot.png" />
+                    <img src={"/" + this.state.screenshot} />
                 </ReactModal>
             </Wrapper>)
     }
