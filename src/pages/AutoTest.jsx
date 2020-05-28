@@ -4,6 +4,7 @@ import ReactModal from 'react-modal'
 import styled from 'styled-components'
 import apis from '../api'
 import '../style/Pipeline.css'
+import SocketIO from '../components/SocketIO'
 
 const Wrapper = styled.div.attrs({className: "h-100 container"})``
 const Feature = styled.div.attrs({className: "align-items-start h-25"})``
@@ -60,6 +61,7 @@ class AutoTest extends Component {
     render() {
         return (
             <Wrapper>
+                <SocketIO value={this.state.id}/>
                 <h4>Aplicaçao: {this.state.app}</h4>
                 <hr/>
                 <h4>Data da Execuçao: <Moment format="DD/MM/YYYY - HH:mm:SS">{this.state.createdAt}</Moment></h4>
